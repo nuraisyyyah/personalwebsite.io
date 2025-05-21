@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title> My Personal Website </title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Fredoka+One&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-padding-top: 64px;
+  }
+  body {
+    font-family: 'Baloo 2', cursive, 'Quicksand', sans-serif;
+    background: #ffe9f3; 
+    color: #7b5a6f; 
+    margin: 0;
+    padding-top: 64px; 
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+    #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #f8a1c5;
+    opacity: 0.4;
+    transform: rotate(-45deg);
+    animation: floatUp linear infinite;
+    filter: drop-shadow(0 0 3px rgba(255, 182, 193, 0.7));
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #f8a1c5;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .heart::after {
+    left: 10px;
+    top: 0;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) rotate(-45deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.4;
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(-10vh) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #e7c6d6, #f5d3de);
+    box-shadow: 0 3px 12px rgba(215,178,201,0.6);
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+  }
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 3rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    padding: 1rem 0;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #8a7186;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 3px solid transparent;
+    transition: all 0.4s ease;
+    font-family: 'Fredoka One', cursive, 'Baloo 2', cursive;
+  }
+  nav ul li a:hover,
+  nav ul li a.active {
+    color: #d89ec6; 
+    border-bottom: 3px solid #d89ec6;
+    text-shadow: 0 0 6px #d8a7cb99;
+  }
+
+  header {
+    text-align: center;
+    padding: 3rem 1rem 3rem;
+    background: radial-gradient(circle at center, #f9e7ef, #e9ccd9);
+    color: #7b5a6f;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 10px 30px rgba(215,177,201,0.25);
+    position: relative;
+    z-index: 2;
+  }
+  .profile-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #e9cbd8;
+    box-shadow: 0 0 18px 5px #e9cbd888;
+    margin: 0 auto 2rem;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .profile-image:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 26px 7px #eecde5;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-weight: 700;
+    font-size: 3.6rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.1em;
+    color: #965f83;
+    text-shadow: 0 0 10px #d9aed0cc;
+  }
+  header p {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 0;
+    letter-spacing: 0.06em;
+    opacity: 0.85;
+    color: #9e7ea9;
+  }
+
+  main {
+    max-width: 880px;
+    margin: 2rem auto 3rem;
+    background: #fae9f1;
+    border-radius: 25px;
+    box-shadow: 0 25px 70px rgba(215,177,201,0.1);
+    padding: 3rem 4rem;
+    transition: box-shadow 0.4s ease;
+    flex-grow: 1;
+    font-family: 'Baloo 2', cursive;
+    color: #8b6e8b;
+    position: relative;
+    z-index: 2;
+  }
+  main:hover {
+    box-shadow: 0 25px 70px rgba(215,177,201,0.25);
+  }
+  section + section {
+    margin-top: 3.5rem;
+  }
+
+  h2 {
+    color: #d89ec6;
+    border-bottom: 3px solid #c99ec7;
+    padding-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 2.3rem;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.12em;
+    opacity: 0;
+    animation: slideInDown 0.55s forwards;
+    font-family: 'Fredoka One', cursive;
+  }
+
+h2:hover {
+  animation: bounce-glow 0.6s ease;
+  color: #ff69b4; 
+  cursor: pointer; 
+}
+
+  section:nth-child(1) h2 { animation-delay: 0.1s; }
+  section:nth-child(2) h2 { animation-delay: 0.22s; }
+  section:nth-child(3) h2 { animation-delay: 0.34s; }
+  section:nth-child(4) h2 { animation-delay: 0.46s; }
+  section:nth-child(5) h2 { animation-delay: 0.58s; }
+  section:nth-child(6) h2 { animation-delay: 0.70s; }
+  section:nth-child(7) h2 { animation-delay: 0.82s; }
+  section:nth-child(8) h2 { animation-delay: 0.95s; }
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+  
+@keyframes slideInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+@keyframes bounce-glow {
+  0%, 100% {
+    transform: translateY(0);
+    text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff69b4;
+  }
+  30% {
+    transform: translateY(-10px);
+    text-shadow: 0 0 15px #ffb6c1, 0 0 25px #ff69b4;
+  }
+  60% {
+    transform: translateY(5px);
+    text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff69b4;
+  }
+}
+
+  p {
+    line-height: 1.75;
+    font-weight: 600;
+    font-size: 1.18rem;
+    margin: 0.5rem 0 1.4rem;
+    color: #907590;
+  }
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  ul.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  ul.skills-list li {
+    background: #e8c9e1;
+    color: #6a3f6a;
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(232,201,225,0.6);
+    transition: background-color 0.4s ease;
+    cursor: default;
+    user-select: none;
+    font-family: 'Baloo 2', cursive;
+  }
+  ul.skills-list li:hover {
+    background: #d89ec6;
+    box-shadow: 0 8px 25px rgba(216,158,198,0.8);
+    color: #fff;
+  }
+  .edu-item,
+  .favourite-item,
+  .interest-item,
+  .family-friends-item {
+    margin-bottom: 1.6rem;
+  }
+  .edu-item h3,
+  .favourite-item h3,
+  .family-friends-item h3 {
+    margin: 0 0 0.35rem 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #c99ec7;
+    letter-spacing: 0.06em;
+    font-family: 'Fredoka One', cursive;
+  }
+  .edu-item span,
+  .favourite-item span {
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #b499c4;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+    font-style: italic;
+    font-family: 'Baloo 2', cursive;
+  }
+
+.education-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff0f6;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(215, 177, 201, 0.2);
+}
+
+.education-table th,
+.education-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f5dce7;
+  color: #6a1b4d;
+  font-weight: normal;
+}
+
+.education-table th {
+  background-color: #fcdff0;
+  color: #4a0d2e;
+  font-weight: bold;
+}
+
+.education-table tr:last-child td {
+  border-bottom: none;
+}
+
+  .edu-item p,
+  .favourite-item p,
+  .family-friends-item p {
+    margin: 0.3rem 0 1rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #a682a7;
+    line-height: 1.6;
+  }
+  .hometown {
+    text-align: justify;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #a085a0;
+    padding-left: 0.1rem;
+    border-left: 4px solid #d89ec6;
+  }
+  #interests ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+    color: #a682a7;
+  }
+  .interest-item {
+    margin-bottom: 0.95rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #a682a7;
+    line-height: 1.5;
+  }
+  #contact-me p {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #a085a0;
+    margin: 0.7rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  #contact-me p span {
+    color: #d49cca;
+    min-width: 80px;
+    font-family: 'Fredoka One', cursive;
+  }
+  #contact-me a {
+    color: #c99ec7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  #contact-me a:hover {
+    color: #d89ec6;
+    text-decoration: underline;
+  }
+
+  #social-icons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.6rem;
+    justify-content: center;
+  }
+  #social-icons a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    color: #bd98b5;
+    transition: color 0.35s ease;
+  }
+  #social-icons a:hover {
+    color: #d89ec6;
+  }
+  #social-icons svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    filter: drop-shadow(0 0 1px rgba(183,146,179,0.3));
+  }
+
+  footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    background: #eedaf0;
+    color: #7b5a7c;
+    font-size: 1.1rem;
+    font-family: 'Fredoka One', cursive;
+    letter-spacing: 0.07em;
+    box-shadow: inset 0 1px 0 rgba(216,158,198,0.3);
+    user-select: none;
+  }
+
+  @media (max-width: 720px) {
+    main {
+      padding: 2.5rem 2rem;
+      margin: 1.5rem auto 3rem;
+      border-radius: 20px;
+    }
+    nav ul {
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+    nav ul li a {
+      font-size: 0.95rem;
+      padding: 0.75rem 0 0.75rem;
+    }
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #d89ec6;
+  border-bottom: 3px solid #d89ec6;
+  text-shadow: 0 0 6px #d8a7cb99;
+  animation: bounce 0.6s ease;
+}
+    header h1 {
+      font-size: 3.2rem;
+    }
+    header p {
+      font-size: 1.35rem;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.4rem;
+    }
+    ul.skills-list li {
+      font-size: 1rem;
+      padding: 0.55rem 1.2rem;
+    }
+    #social-icons {
+      gap: 1.3rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="background">
+  <div class="heart" style="left: 10%; animation-duration: 10s; animation-delay: 0s;"></div>
+  <div class="heart" style="left: 20%; animation-duration: 12s; animation-delay: 2s;"></div>
+  <div class="heart" style="left: 30%; animation-duration: 9s; animation-delay: 4s;"></div>
+  <div class="heart" style="left: 40%; animation-duration: 11s; animation-delay: 1s;"></div>
+  <div class="heart" style="left: 50%; animation-duration: 13s; animation-delay: 3s;"></div>
+  <div class="heart" style="left: 60%; animation-duration: 10s; animation-delay: 5s;"></div>
+  <div class="heart" style="left: 70%; animation-duration: 12s; animation-delay: 2.5s;"></div>
+  <div class="heart" style="left: 80%; animation-duration: 11s; animation-delay: 4.5s;"></div>
+  <div class="heart" style="left: 90%; animation-duration: 9s; animation-delay: 7s;"></div>
+</div>
+
+<nav>
+  <ul>
+    <li><a href="#about-me" class="nav-link active">About Me</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#education" class="nav-link">Education</a></li>
+    <li><a href="#favourite" class="nav-link">Favourite</a></li>
+    <li><a href="#hometown" class="nav-link">Hometown</a></li>
+    <li><a href="#interests" class="nav-link">Interests</a></li>
+    <li><a href="#family-friends" class="nav-link">Family & Friends</a></li>
+    <li><a href="#contact-me" class="nav-link">Contact Me</a></li>
+  </ul>
+</nav>
+
+<header>
+  <img
+    src="images/myself.jpg"
+    alt="Profile Picture"
+    class="profile-image"
+  />
+  <h1>Nuraisyah Binti Mohd Zamri</h1>
+  <p> | Full time student | </p>
+</header>
+
+<main>
+  <section id="about-me">
+    <h2>About Me</h2>
+    <p>Hi, I’m Aisyah! I’m currently a diploma student with a strong interest in travelling, cooking, watching movies, and listening to music. I’ve been proud to make the Dean’s List for two semesters, and I value my ability to adapt well to new environments. I enjoy exploring new experiences and always look for opportunities to learn and grow. Welcome to my page!</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+      <li>Barista skills</li>
+      <li>Speaking French</li>
+      <li>Cooking</li>
+      <li>Library Cataloging</li>
+    </ul>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu-item">
+      <h3>Diploma in Informatics Library</h3>
+      <span>Universiti Teknologi MARA (UiTM), Kedah 2023 – 2026</span>
+      <p>Currently pursuing a diploma in Library Informatics, focusing on information management, digital resources, and library systems. This program enhances both my 	technical and organizational skills, preparing me for modern information-related fields. Currently in my 4th semester.</p>
+    </div>
+    <div class="edu-item">
+      <h3>High School (SPM) Science Rumah Tangga Stream.</h3>
+      <span>SMK Kusel — 2018 – 2022</span>
+      <p>Elective subjects: Visual Arts Education (Pendidikan Seni Visual), Additional Science (Sains Tambahan), and Home Science (Sains Rumah Tangga)
+	Achieved 5As in SPM, demonstrating strong academic performance across science, arts, and practical subjects.</p>
+    </div>
+
+    <h3>Timeline</h3>
+    <table class="education-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Level</th>
+          <th>School/Institution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2012 - 2014</td>
+          <td>Primary School</td>
+          <td>SK LKTP Tersang 3, Pahang</td>
+        </tr>
+        <tr>
+          <td>2014 - 2017</td>
+          <td>Primary School</td>
+          <td>SK Bandar Baru Kuala Selangor, Selangor</td>
+        </tr>
+        <tr>
+          <td>2018 - 2022</td>
+          <td>High School</td>
+          <td>SMK KUSEL</td>
+        </tr>
+        <tr>
+          <td>2023 - 2026</td>
+          <td>Diploma</td>
+          <td>UiTM Kedah</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+  </section>
+
+ <section id="favourite">
+  <h2>Favourite</h2>
+  <div class="favourite-item">
+    <h3>My Favorite K-pop Group: BOYNEXTDOOR</h3>
+    <img src="images/boynextdoor.jpg" alt="BOYNEXTDOOR Group Picture" style="max-width:100%; border-radius:20px; box-shadow: 0 5px 20px rgba(216,158,198,0.5); margin: 	1rem 0;">
+    	<p>I love listening to BOYNEXTDOOR! BOYNEXTDOOR’s concept is simple—they’re charismatic and friendly, just like the typical boy next door. Their music 	illustrates everyday stories and emotions that resonate with our daily lives, making their songs relatable to the audience.💖</p>
+	</div>
+	</section>
+
+    <div class="favourite-item">
+      <h3>Latest Release</h3>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/ic31SJ4uK4Y?si=QQ0cDBgI9aspZrwN&amp;start=139" title="YouTube video 	player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 	referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><p>Check out their latest release</p>
+    </div>
+  </section>
+
+<div class="favourite-item">
+      <h3>Favourite song</h3>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/9ujOxAsMwyE?si=80AMYCjuzz7xukCH&amp;start=57" title="YouTube video player" 	frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 	referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <p>Check out one of my favorite songs by BOYNEXTDOOR!</p>
+    </div>
+  </section>
+
+<section id="hometown">
+    <h2>Hometown</h2>
+    <p class="hometown">I was born in Selangor, a place that holds many of my early memories. Selangor is a vibrant and developed state in Malaysia, known as the country’s most populous and economically important region. It surrounds the capital city, Kuala Lumpur, and offers a mix of modern urban life and beautiful natural spots. Selangor is famous for its shopping malls, industrial hubs, and cultural attractions. It’s a place full of opportunities and diversity, making it a lively place to live and work. Currently, I live in Sungai Petani, Kedah, where I’m 	continuing my studies and growing as a person. Sungai Petani is a bustling town in the northern state of Kedah, Malaysia. It’s known as an important commercial and industrial center in the region, offering a more relaxed pace of life compared to the bigger cities. Sungai Petani has a rich cultural heritage with many traditional markets, local food, and historical sites. It’s a great place that blends the charm of small-town living with the conveniences of modern facilities.</p>
+  </section>
+
+
+  <section id="interests">
+    <h2>Interests</h2>
+    <ul>
+      <li class="interest-item">Listening to music</li>
+      <li class="interest-item">Hiking and outdoor adventures</li>
+      <li class="interest-item">Watching movies and K-drama</li>
+      <li class="interest-item">Reading novel</li>
+    </ul>
+  </section>
+
+<section id="family-friends">
+  <h2>Family & Friends</h2>
+  <div class="family-friends-item">
+  <p>I cherish my close-knit circle of family and friends who support and inspire me. We enjoy spending quality time, sharing laughter, and creating meaningful memories together.</p>
+
+    <h3 style="margin-top: 1.2rem;">My Family</h3>
+    <div style="display:flex; justify-content:center; gap:1rem; flex-wrap: wrap;">
+      <img src="images/family1.jpg" alt="Family 1" style="width:400px; height:350px; border: 4px solid #d79ec6; border-radius: 8px; object-fit:cover; box-shadow: 0 2px 10px rgba(215,178,201,0.5);"/>
+      <img src="images/family2.jpg" alt="Family 2" style="width:300px; height:350px; border: 4px solid #d79ec6; border-radius: 8px; object-fit:cover; box-shadow: 0 2px 10px rgba(215,178,201,0.5);"/>
+    <p>I come from a loving family of five, which includes my supportive parents, my two wonderful little brothers, and myself. Each of us bringing our own unique energy and joy to our home.</p>
+    </div>
+
+    <h3 style="margin-top: 1.2rem;">My Friends</h3>
+    <div style="display:flex; justify-content:center; gap:1rem; flex-wrap: wrap;">
+      <img src="images/friend1.jpg" alt="Friend 1" style="width:300px; height:300px; border: 4px solid #d79ec6; border-radius: 8px; object-fit:cover; box-shadow: 0 2px 10px rgba(215,178,201,0.5);"/>
+      <img src="images/friend2.jpg" alt="Friend 2" style="width:300px; height:300px; border: 4px solid #d79ec6; border-radius: 8px; object-fit:cover; box-shadow: 0 2px 10px rgba(215,178,201,0.5);"/>
+      <p>I have three amazing friends who have been with me through thick and thin — each one with their own personality, but together we share countless laughs, memories, and unforgettable moments.</p>
+    </div>
+   <h3 style="margin-top: 1.2rem;">My Roommates</h3>
+   <div style="display:flex; justify-content:center; gap:1rem; flex-wrap: wrap;">
+      <img src="images/room.jpg" alt="Friend 1" style="width:300px; height:300px; border: 4px solid #d79ec6; border-radius: 8px; object-fit:cover; box-shadow: 0 2px 10px rgba(215,178,201,0.5);"/>
+      <p>Living with my roommates has been a fun and unforgettable experience — we share not just a space, but late-night talks, laughter, and a bond that feels like family.</p>
+    </div>
+
+
+
+  </div>
+</section>
+
+  <section id="contact-me">
+  <h2>Contact Me</h2>
+  <p><strong>Phone:</strong> 012-2699397</p>
+  <p><strong>Email:</strong> <a href="mailto:nuraisyyyah@gmail.com">nuraisyyyah@gmail.com</a></p>
+
+    <a href="https://github.com/nuraisyyyah" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+      <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="#000000">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.38.6.11.82-.26.82-.58v-2.13c-3.34.73-4.03-1.61-4.03-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.23 1.84 1.23 1.07 1.83 2.81 1.3 3.5.95 0-.89.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.52 11.52 0 0 1 6 0c2.3-1.55 3.31-1.23 3.31-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.69.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+    </a>
+
+    <a href="https://instagram.com/nuraisyyyah" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+      <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="#C13584">
+        <path d="M7.75 2C4.85 2 2.5 4.35 2.5 7.25v9.5C2.5 19.65 4.85 22 7.75 22h8.5c2.9 0 5.25-2.35 5.25-5.25v-9.5C21.5 4.35 19.15 2 16.25 2h-8.5zm0 1.5h8.5c1.98 0 3.75 1.77 3.75 3.75v9.5c0 1.98-1.77 3.75-3.75 3.75h-8.5c-1.98 0-3.75-1.77-3.75-3.75v-9.5c0-1.98 1.77-3.75 3.75-3.75zm4.25 3a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zm0 1.5a2.75 2.75 0 1 1 0 5.5 2.75 2.75 0 0 1 0-5.5zm4.75-.88a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+
+<footer>
+  &copy; 2025 Aisyah. All rights reserved.
+</footer>
+
+<script>
+  // Highlight nav link based on scroll position with IntersectionObserver
+  const sections = document.querySelectorAll('main section');
+  const navLinks = document.querySelectorAll('nav ul li a');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60% 0px',
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          if(link.getAttribute('href') === '#' + id){
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
